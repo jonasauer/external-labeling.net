@@ -1,0 +1,69 @@
+
+
+<input id="filters"
+       name="filters"
+       type="text"
+       style="display: none">
+
+<div class="row">
+    <div class="offset-3"></div>
+    <div class="col-md-6">
+        <label>Filters</label>
+        <div class="row">
+            {{# each categories as |category category_key| }}
+                <div class="col-md-4">
+                    <label>{{category.name}}</label>
+                    <br>
+                    <div class="form-check">
+                        {{#each category.filters as |filter filter_key|}}
+                            <!-- will not be sent -->
+                            <input id="{{filter.id}}"
+                                   type="checkbox"
+                                   class="form-check-input"/>
+                            <label for="{{filter.id}}" class="form-check-label">{{filter.name}}</label>
+                            <br>
+                        {{/each}}
+                    </div>
+                </div>
+            {{/ each }}
+        </div>
+    </div>
+    <div class="offset-3"></div>
+</div>
+
+
+<script type="text/javascript">
+
+    let filter_list = [];
+
+    $(document).ready(function(){
+
+        <!-- init checkboxes and filter_list-->
+        {{# each fill_form.filters as |filter filter_key|}}
+            filter_list.push("{{filter}}");
+            $("#{{filter}}").prop("checked", true);
+        {{/ each}}
+
+        $("#filters").prop("value", JSON.stringify(filter_list));
+
+
+        <!-- update array when clicked -->
+        {{# each categories as |category category_key| }}
+            {{#each category.filters as |filter filter_key|}}
+
+                $("#{{filter.id}}").on("change", function(){
+                    if($(this).prop("checked")){
+                        filter_list.push("{{filter.id}}");
+                    }else{
+                        let index = filter_list.indexOf("{{filter.id}}");
+                        if (index > -1) {
+                            filter_list.splice(index, 1);
+                        }
+                    }
+                    $("#filters").prop("value", JSON.stringify(filter_list));
+                });
+            {{/each}}
+        {{/ each }}
+    });
+
+</script>

@@ -1,0 +1,33 @@
+
+
+<div class="row">
+    <div class="offset-3"></div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input id="title"
+                   name="title"
+                   type="text"
+                   class="form-control"
+                   placeholder="Enter a title"
+                   value="{{fill_form.title}}"
+                   required>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="form-group">
+            <label for="year">Year</label>
+            <input id="year"
+                   name="year"
+                   type="number"
+                   class="form-control"
+                   placeholder="Enter a year"
+                   min="0000"
+                   max="2030"
+                   value="{{fill_form.year}}"
+                   required>
+        </div>
+    </div>
+</div>

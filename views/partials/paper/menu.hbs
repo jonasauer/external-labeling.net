@@ -1,0 +1,138 @@
+<div class="container-fluid sticky-top border-bottom bg-light">
+    <div class="row text-center">
+
+        <!-- filter buttons -->
+        <div class="col-md-8">
+            <div class="row h-100"
+                 style="display: flex; align-items: center">
+            {{# each categories as |category category_key|}}
+                <div class="col-md-4">
+                    {{category.name}}
+                    <br>
+                    {{# each category.filters as |filter filter_key| }}
+                        <a title="{{filter.name}}">
+                            <img id="{{filter.id}}"
+                                 class="pointer-on-hover mx-2"
+                                 src="{{filter.image}}"
+                                 width="40"
+                                 height="40">
+                        </a>
+                    {{/ each }}
+                </div>
+            {{/ each}}
+            </div>
+        </div>
+
+
+        <!-- Search and Year -->
+        <div class="col-md-4 border-left">
+            <div class="row w-75 m-auto">
+
+                <div class="col-md-12 my-2">
+                    <input type="text"
+                           id="search"
+                           class="form-control"
+                           placeholder="search papers...">
+                </div>
+
+                <div class="col-md-12 my-2">
+                    <span>Publication Year</span>
+                    <div class="slider-div w-100"></div>
+                    <span id="min-year">0000</span> - <span id="max-year">0000</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        // year functionality
+        let minYear = new Date().getFullYear();
+        let maxYear = new Date().getFullYear();
+
+        {{#each papers as |paper paper_key|}}
+            {{# if paper.visible}}
+                minYear = Math.min(minYear, {{paper.year}});
+                maxYear = Math.max(maxYear, {{paper.year}});
+            {{/ if }}
+            {{# if ../user}}
+                console.log("user");
+                minYear = Math.min(minYear, {{paper.year}});
+                maxYear = Math.max(maxYear, {{paper.year}});
+            {{/if}}
+        {{/each}}
+
+        $("#min-year").text(minYear);
+        $("#max-year").text(maxYear);
+
+        $(".slider-div").slider({
+            range: true,
+            min: minYear,
+            max: maxYear,
+            values: [minYear, maxYear],
+            slide: function (event, ui) {
+                $("#min-year").text(ui.values[0]);
+                $("#max-year").text(ui.values[1]);
+                filters.setYear([ui.values[0], ui.values[1]]);
+                filter();
+            }
+        });
+
+
+        // filter functionality
+        filters.initFilters({
+            {{#each categories as |category category_key|}}
+                "{{category.id}}": {
+                    {{#each category.filters as |filter filter_key|}}
+                        "{{filter.id}}": false,
+                    {{/each}}
+                },
+            {{/each}}
+        });
+
+        filters.setYear([minYear, maxYear]);
+
+        $("#search").on("input", function () {
+            filters.setText($(this).val());
+            filter();
+        });
+
+
+
+
+
+
+        {{# each categories as |category category_key| }}
+            {{# each category.filters as |filter filter_key| }}
+                $("#{{filter.id}}").css("filter", "brightness(0.7)");
+                $("#{{filter.id}}").on("click", function () {
+                    filters.wasPressed("{{category.id}}", "{{filter.id}}");
+                    filter();
+                    if (filters.isActive("{{category.id}}", "{{filter.id}}")) {
+                        $(this).css("filter", "brightness(1.0)");
+                    } else {
+                        $(this).css("filter", "brightness(0.7)");
+                    }
+                });
+            {{/ each }}
+        {{/ each }}
+
+
+    });
+
+
+    const filter = function () {
+        {{#each papers as |paper paper_key|}}
+            $("#{{paper._id}}").hide();
+            if (filters.executeFilter({{{paper}}})) {
+                $("#{{paper._id}}").show();
+            }
+         {{/each}}
+    };
+
+</script>

@@ -1,0 +1,13 @@
+
+{{>message}}
+<br>
+<div class="container">
+    {{>user/form/form_title form_title="Login"}}
+    <br>
+    <form method="post" action="/user/login">
+        {{>user/form/input_username}}
+        {{>user/form/input_password}}
+        <br>
+        {{>user/form/buttons confirm="Login" cancel="Cancel"}}
+    </form>
+</div>

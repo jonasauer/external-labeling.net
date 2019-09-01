@@ -1,0 +1,36 @@
+
+a:hover{
+	cursor: pointer;
+}
+
+.paper-card {
+	display: inline-block;
+}
+
+.paper-card-wrapper{
+	margin: 0;
+	padding: 0px 0px 20px 20px;
+}
+
+.alert-error {
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+
+.pointer-on-hover:hover{
+	cursor: pointer;
+}
+
+.ui-slider {
+	background: #EEEEEE;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	background: #509a9a;
+	border-color: black;
+	border-radius: 5px;
+	position: absolute;
+}
+.ui-slider-horizontal .ui-slider-range {
+	background: #FFFFFF;
+}

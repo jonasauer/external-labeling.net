@@ -1,0 +1,79 @@
+
+
+<div class="row">
+    <div class="offset-3"></div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="bibtex">BibTeX</label>
+            <textarea id="bibtex"
+                      name="bibtex"
+                      class="form-control"
+                      placeholder="Enter a BibTeX"
+                      rows="11"
+                      required>{{fill_form.bibtex}}</textarea>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <br>
+        {{#each bibtex_types as |bib_type bib_type_key|}}
+            <a id="{{bib_type.type}}">{{bib_type.type}}</a><br>
+        {{/each}}
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+
+
+        {{#each bibtex_types as |bib_type bib_type_key|}}
+            $("#{{bib_type.type}}").on("click", function(){
+                let bib_str = "@{{bib_type.type}}{citationKey";
+                {{#each bib_type.req as |tag tag_key|}}
+                    bib_str += ",\n    {{tag}} = {}";
+                {{/each}}
+
+                {{#each bib_type.opt as |tag tag_key|}}
+                    bib_str += ",\n    {{tag}} = {}";
+                {{/each}}
+                bib_str += "\n}";
+                $("#bibtex").prop("value", bib_str);
+            });
+        {{/each}}
+
+        //todo: this should normally work with bibtex too, but it does not...
+        //todo: probably needs to be redone
+        const Cite = require('citation-js');
+        $("#bibtex").on("input", function(){
+            const citation = new Cite($(this).prop("value"));
+            const bibjson = citation.get({type: "json"})[0];
+            console.log(bibjson);
+            if(bibjson){
+                if(!$("#title").prop("value")){
+                    $("#title").prop("value", bibjson.title)
+                }
+                if(!$("#year").prop("value")){
+                    $("#year").prop("value", bibjson.year)
+                }
+                if(!$("#authors").prop("value") && bibjson.author){
+                    let authors = "";
+                    if(bibjson.author.length > 2){
+                        authors += bibjson.author[0].given + " " + bibjson.author[0].family + " et al.";
+                    }else{
+                        if(bibjson.author[0])
+                            authors += bibjson.author[0].given + " " + bibjson.author[0].family;
+                        if(bibjson.author[1])
+                            authors += " and " + bibjson.author[1].given + " " + bibjson.author[1].family;
+                    }
+                    $("#authors").prop("value", authors);
+                }
+                if(!$("#doi").prop("value")){
+                    $("#doi").prop("value", bibjson.DOI)
+                }
+            }
+        });
+    });
+
+</script>

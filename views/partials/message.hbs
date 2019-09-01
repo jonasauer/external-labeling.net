@@ -1,0 +1,30 @@
+
+{{# each messages as |type_array type| }}
+    <div class="alert alert-{{type}} alert-dismissible fade show" role="alert">
+        <ul>
+            {{# each type_array as |msg msg_key| }}
+                <li>
+                    {{msg}}
+                </li>
+            {{/ each }}
+        </ul>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="fa fa-remove"></i>
+        </button>
+    </div>
+{{/ each }}
+
+{{# if errors.errors }}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <ul>
+            {{# each errors.errors as |error error_key| }}
+                <li>
+                    {{error.msg}}
+                </li>
+            {{/ each }}
+        </ul>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="fa fa-remove"></i>
+        </button>
+    </div>
+{{/if}}

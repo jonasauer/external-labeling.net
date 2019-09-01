@@ -1,0 +1,192 @@
+
+
+
+{
+    "development": {
+        "config_id": "development",
+        "title": "External Labeling",
+        "app_name": "External Labeling",
+        "node_port": 8000,
+        "database": "mongodb://localhost:27017/externallabeling",
+        "paper_collection": "paper",
+        "user_collection": "user",
+        "cite_this_site": "https://arxiv.org/abs/1902.01454",
+        "contact_mail": "mailto:example@example.com",
+        "contact_twitter": "#",
+        "other_surveys": [
+            {
+                "name": "Dynamic Graph Visualization",
+                "link": "http://dynamicgraphs.fbeck.com"
+            },
+            {
+                "link": "http://financevis.net",
+                "name": "Financial Visualization"
+            },
+            {
+                "link": "http://idav.ucdavis.edu/~ki/STAR/",
+                "name": "Performance Visualization"
+            },
+            {
+                "link": "http://spacetimecubevis.com",
+                "name": "Space-Time-Cube Visualization"
+            },
+            {
+                "link": "http://textvis.lnu.se",
+                "name": "Text Visualization"
+            },
+            {
+                "link": "http://survey.timeviz.net",
+                "name": "Time Visualization"
+            },
+            {
+                "link": "http://multivis.net",
+                "name": "Multi-faceted Visualization"
+            },
+            {
+                "link": "http://www.cvast.tuwien.ac.at/~alsallakh/SetViz/literature/www/index.html",
+                "name": "Set Visualization"
+            },
+            {
+                "link": "http://groups-in-graphs.corinna-vehlow.com",
+                "name": "Groups in Graph Visualization"
+            },
+            {
+                "link": "http://www.sci.utah.edu/~shusenl/highDimSurvey/website/",
+                "name": "High-dimensional Visualization"
+            },
+            {
+                "link": "http://paperviz.org",
+                "name": "Literature Visualization"
+            },
+            {
+                "link": "http://biovis.lnu.se",
+                "name": "Biological Visualization"
+            },
+            {
+                "link": "http://sentimentvis.lnu.se",
+                "name": "Sentiment Visualization"
+            },
+            {
+                "link": "http://104.196.253.120/pva_browser/",
+                "name": "Predictive Visual Analytics"
+            },
+            {
+                "link": "http://sparklines-literature.fbeck.com/",
+                "name": "Sparkline Visualization"
+            },
+            {
+                "link": "http://cartogram.cs.arizona.edu/survis-cartogram/",
+                "name": "Cartograms"
+            },
+            {
+                "link": "http://www.aviz.fr/~bbach/timelines/",
+                "name": "Timeline Visualization"
+            }
+        ],
+        "bibtex_types": [
+            {
+                "type": "article",
+                "req": ["author", "title", "journal", "year"],
+                "opt": ["volume", "number", "pages", "month", "note"]
+            },
+            {
+                "type": "book",
+                "req": ["author", "title", "publisher", "year"],
+                "opt": ["volume", "series", "address", "edition", "month", "note"]
+            },
+            {
+                "type": "booklet",
+                "req": ["title"],
+                "opt": ["author", "howpublished", "address", "month", "year", "note"]
+            },
+            {
+                "type": "inbook",
+                "req": ["author", "title", "chapter", "pages", "publisher", "year"],
+                "opt": ["volume", "series", "type", "address", "edition", "month", "note"]
+            },
+            {
+                "type": "incollection",
+                "req": ["author", "title", "booktitle", "publisher", "year"],
+                "opt": ["editor", "volume", "series", "type", "chapter", "pages", "address", "edition", "month", "note"]
+            },
+            {
+                "type": "inproceedings",
+                "req": ["author", "title", "booktitle", "year"],
+                "opt": ["editor", "volume", "series", "pages", "address", "month", "organization", "publisher", "note"]
+            },
+            {
+                "type": "manual",
+                "req": ["title"],
+                "opt": ["author", "organization", "address", "edition", "month", "year", "note"]
+            },
+            {
+                "type": "mastersthesis",
+                "req": ["author", "title", "school", "year"],
+                "opt": ["type", "address", "month", "note"]
+            },
+            {
+                "type": "phdthesis",
+                "req": ["author", "title", "school", "year"],
+                "opt": ["type", "address", "month", "note"]
+            },
+            {
+                "type": "proceedings",
+                "req": ["title", "year"],
+                "opt": ["editor", "volume", "series", "address", "publisher", "note", "month", "organization"]
+            },
+            {
+                "type": "techreport",
+                "req": ["author", "title", "institution", "year"],
+                "opt": ["type", "number", "address", "month", "note"]
+            },
+            {
+                "type": "unpublished",
+                "req": ["author", "title", "note"],
+                "opt": ["month", "year"]
+            }
+        ],
+        "filters": [
+            {
+                "id": "c0",
+                "name": "Leader",
+                "filters": [
+                    {"id": "f00", "name": "straight", "image": "/images/category1.png"},
+                    {"id": "f01", "name": "orthogonal", "image": "/images/category1.png"},
+                    {"id": "f02", "name": "orthodiagonal", "image": "/images/category1.png"},
+                    {"id": "f03", "name": "other", "image": "/images/category1.png"}
+                ]
+            },
+            {
+                "id": "c1",
+                "name": "Contour",
+                "filters": [
+                    {"id": "f10", "name": "bounding box", "image": "/images/category2.png"},
+                    {"id": "f11", "name": "polygon", "image": "/images/category2.png"},
+                    {"id": "f12", "name": "free", "image": "/images/category2.png"},
+                    {"id": "f13", "name": "hybrid", "image": "/images/category2.png"}
+                ]
+            },
+            {
+                "id": "c2",
+                "name": "Techniques",
+                "filters": [
+                    {"id": "f20", "name": "exact algorithms", "image": "/images/category3.png"},
+                    {"id": "f21", "name": "heuristic algorithms", "image": "/images/category3.png"},
+                    {"id": "f22", "name": "user evaluation", "image": "/images/category3.png"},
+                    {"id": "f23", "name": "other", "image": "/images/category3.png"}
+                ]
+            }
+        ]
+    },
+
+
+    "testing": {
+        "config_id": "testing"
+    },
+
+
+    "production": {
+        "config_id": "production",
+        "node_port": 3000
+    }
+}

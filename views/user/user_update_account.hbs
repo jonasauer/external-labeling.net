@@ -1,0 +1,15 @@
+
+{{>message}}
+<br>
+<div class="container">
+    {{>user/form/form_title form_title="Edit Account"}}
+    <br>
+    <form method="post" action="/user/update/account">
+        {{>user/form/input_id}}
+        {{>user/form/input_firstname_lastname}}
+        {{>user/form/input_email}}
+        {{>user/form/input_username}}
+        <br>
+        {{>user/form/buttons confirm="Save" cancel="Cancel"}}
+    </form>
+</div>

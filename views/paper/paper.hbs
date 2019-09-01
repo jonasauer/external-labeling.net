@@ -1,0 +1,57 @@
+
+{{# with this}}
+    {{>paper/menu}}
+{{/with}}
+
+{{>message}}
+<br>
+<div class="container-fluid">
+    <!-- Papers -->
+    <div class="row">
+        {{# each papers as |paper paper_key| }}
+            {{#with ../this}}<!-- has to be done in order to access user inside the partial -->
+                {{>paper/paper
+                        param_id=paper._id
+                        param_image=paper.image_path
+                        param_title=paper.title
+                        param_author=paper.authors
+                        param_year=paper.year
+                        param_visible=paper.visible
+                        param_user=../user
+                }}
+            {{/with}}
+        {{/ each }}
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    let show_paper = function(event, id){
+        event.stopPropagation();
+        window.location.href = "paper/show/" + id;
+    };
+
+    let update_paper = function(event, id){
+        event.stopPropagation();
+        window.location.href = "paper/update/" + id;
+    };
+
+    let delete_paper = function(event, id){
+        event.stopPropagation();
+        if(confirm("Do you really want to remove this paper?")){
+            window.location.replace("paper/delete/" + id);
+        }
+    };
+
+    let toggle_visible_paper = function(event, id){
+        event.stopPropagation();
+        if(confirm("Do you really want to show/hide this paper?")){
+            window.location.replace("paper/visible/" + id);
+        }
+    };
+
+</script>
+
+
+

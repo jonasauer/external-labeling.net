@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <link rel="icon" href="/images/favicon.png">
+    <title>{{ title }}</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/scripts/filter.js"></script>
+    <script src="/scripts/citation.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"
+         style="z-index: 5000"> <!-- The z-index is needed because else the filter menu would be above the dropdown menus -->
+        <a class="navbar-brand" href="/">
+            <i class="fa fa-file-text-o"></i>
+            External Labeling
+        </a>
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="navbarSupportedContent"
+             class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <!-- Paper link -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/paper">Papers </a>
+                </li>
+
+                <!-- User link -->
+                {{#if user}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">Users </a>
+                </li>
+                {{/if}}
+
+                <!-- Contact dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       id="contact-dropdown"
+                       role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false">Contact
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="contact-dropdown">
+                        <a class="dropdown-item" target="_blank" href="{{contact_twitter}}">
+                            <i class="fa fa-twitter"></i> Twitter
+                        </a>
+                        <a class="dropdown-item" target="_blank" href="{{contact_mail}}">
+                            <i class="fa fa-envelope"></i> Email
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Other surveys dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       id="surveys-dropdown"
+                       role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false">Other surveys
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="surveys-dropdown">
+                        {{#each other_surveys}}
+                        <a href="{{this.link}}"
+                           class="dropdown-item"
+                           target="_blank">
+                            {{this.name}}
+                        </a>
+                        {{/each}}
+                    </div>
+                </li>
+
+
+                <!-- About dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       id="about-dropdown"
+                       role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false">About
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="about-dropdown">
+                        <a class="dropdown-item" href="{{cite_this_site}}" target="_blank">
+                            How to cite this site?
+                        </a>
+                        <a class="dropdown-item" href="/about">
+                            About this site
+                        </a>
+                    </div>
+                </li>
+
+
+
+
+
+
+
+            </ul>
+
+            <div class="dropdown-divider"></div>
+
+            <!-- Right side -->
+            <ul class="navbar-nav ml-auto">
+
+                {{# if user }}
+                <li class="nav-item">
+                    <button class="btn btn-sm btn-outline-secondary mr-1" type="button">
+                        <a class="nav-link" href="/paper/create">
+                            <i class="fa fa-plus"></i> Paper
+                        </a>
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary mr-3" type="button">
+                        <a class="nav-link" href="/user/register">
+                            <i class="fa fa-plus"></i> User
+                        </a>
+                    </button>
+                </li>
+                {{/ if }}
+
+                <!-- User dropdown -->
+                {{# if user}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       id="user-dropdown"
+                       role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false">
+                        <i class="fa fa-user"></i> {{user.username}}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user-dropdown">
+                        <a class="dropdown-item" href="/user/update/account">
+                            <i class="fa fa-cog"></i> Edit Account
+                        </a>
+                        <a class="dropdown-item" href="/user/update/password">
+                            <i class="fa fa-key"></i> Change Password
+                        </a>
+                        <a class="dropdown-item" href="/user/logout">
+                            <i class="fa fa-sign-out"></i> Logout
+                        </a>
+                    </div>
+                </li>
+                {{/if}}
+
+                <!-- Login link -->
+                {{# unless user}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/login">
+                        <i class="fa fa-sign-in"></i> Login
+                    </a>
+                </li>
+                {{/unless}}
+            </ul>
+        </div>
+    </nav>
+
+    {{{body}}}
+
+    <br>
+    <br>
+    <footer class="page-footer font-small border-top">
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="https://www.ac.tuwien.ac.at/externallabeling/"> externallabeling.net</a>
+        </div>
+    </footer>
+
+</body>
+</html>

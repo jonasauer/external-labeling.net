@@ -1,0 +1,38 @@
+
+{{#ifOr user param_visible}}
+<div id="{{param_id}}" class="col-sm-6 col-md-4 col-lg-3 col-xl-2 paper-card-wrapper">
+
+    <div class="card paper-card w-100 h-100 d-flex flex-column"
+         onclick="show_paper(event, '{{param_id}}')"
+         {{#unless param_visible}}
+         style="opacity: 0.6;"
+         {{/unless}}>
+
+        <img src="{{param_image}}" class="card-img-top" alt="...">
+
+        {{# if user }}
+        <div class="card-img-overlay text-right">
+            <button class="btn btn-dark"
+                    onclick="toggle_visible_paper(event, '{{param_id}}')">
+                <i class="fa fa-eye"></i>
+            </button>
+            <button class="btn btn-dark"
+                    onclick="update_paper(event, '{{param_id}}')">
+                <i class="fa fa-edit"></i>
+            </button>
+            <button class="btn btn-danger"
+                    onclick="delete_paper(event, '{{param_id}}')">
+                <i class="fa fa-remove"></i>
+            </button>
+        </div>
+        {{/ if }}
+
+        <div class="card-body mt-auto d-flex">
+            <div class="mt-auto">
+                <h5 class="card-title">{{param_title}} ({{param_year}})</h5>
+                <p class="card-text">{{param_author}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{{/ifOr}}

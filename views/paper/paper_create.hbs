@@ -1,0 +1,17 @@
+
+{{>message}}
+<br>
+<div class="container">
+    {{>paper/form/form_title form_title="Add Paper"}}
+    <br>
+    <form method="post" action="/paper/create" enctype="multipart/form-data">
+        {{>paper/form/input_title_year}}
+        {{>paper/form/input_authors}}
+        {{>paper/form/input_doi_dblp}}
+        {{>paper/form/input_image}}
+        {{>paper/form/input_bibtex}}
+        {{>paper/form/input_filters}}
+        <br>
+        {{>paper/form/buttons confirm="Save" cancel="Cancel"}}
+    </form>
+</div>
