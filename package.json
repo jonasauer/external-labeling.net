@@ -22,7 +22,7 @@
     "express-session": "^1.16.2",
     "express-validator": "^6.1.1",
     "font": "0.0.4",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "mongodb": "^3.2.3",
     "mongoose": "^5.5.2",
     "morgan": "~1.6.1",
