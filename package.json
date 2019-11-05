@@ -24,7 +24,7 @@
     "font": "0.0.4",
     "lodash": "^4.17.11",
     "mongodb": "^3.2.3",
-    "mongoose": "^5.5.2",
+    "mongoose": "^5.7.5",
     "morgan": "~1.6.1",
     "multer": "^1.4.1",
     "passport": "^0.4.0",
